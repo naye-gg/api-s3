@@ -3,7 +3,8 @@ import json
 
 def lambda_handler(event, context):
     s3 = boto3.client('s3')
-    body = json.loads(event['body'])
+  
+    body = event['body'] if isinstance(event['body'], dict) else json.loads(event['body'])
     bucket_name = body['bucket']
 
     try:
